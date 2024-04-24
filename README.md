@@ -13,3 +13,13 @@
 * Simulation slow subscriber  
 ![alt text](images/image-1.png)  
 Karena ada nya downtime thread selama 1000ms maka akan terjadi queue yang panjang hingga 25 antrian saat menjalankan cargo run secara cepat dari console publisher. 
+
+* Running at least three subscribers
+![alt text](images/image-2.png)
+![alt text](images/image.png)  
+Saat menggunakan tiga subscriber sekaligus dapat dilihat bahwa spike queuenya lebih cepat menurun dibanding dengan hanya satu subscriber karena consumptionnya terbagi secara paralel. 
+
+* What can we improve?  
+1. Error Handling: Kedua kode publisher dan subscriber menggunakan unwrap() secara ekstensif, yang dapat menyebabkan panic dan menghentikan program jika terjadi kesalahan lebih baik menggunakan match atau if let.
+
+2. Gunakan konstanta untuk string yang diulang, seperti "amqp://guest:guest@localhost:5672" agar code menjadi lebih readable.
